@@ -3,7 +3,6 @@
 
 A modern, decentralized data marketplace dashboard built with React, Vite, and TypeScript. This application showcases real-time data feeds, AI-powered agents, and a beautiful Web3-inspired UI.
 
-The original design is available at https://www.figma.com/design/HLlHbxvU2FljMfRDCu5Rmv/Web3-Data-Marketplace-Dashboard.
 
 ## Features
 
