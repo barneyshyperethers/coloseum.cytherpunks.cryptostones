@@ -118,12 +118,24 @@ Learn more at [Radix UI Documentation](https://www.radix-ui.com/docs/primitives/
 
 The easiest way to deploy this application is with [Vercel](https://vercel.com):
 
-1. Push your code to GitHub, GitLab, or Bitbucket
-2. Import your repository to Vercel
-3. Vercel will automatically detect Vite and configure the build
-4. Your app will be deployed with a production URL
+1. **Push your code to GitHub, GitLab, or Bitbucket**
+2. **Import your repository to Vercel**
+3. **Vercel will automatically detect Vite** - No additional configuration needed!
+4. **Deploy!** - Your app will be live with a production URL
+
+The project includes:
+- ✅ `vercel.json` - Proper configuration for SPA routing
+- ✅ `tsconfig.json` - TypeScript configuration
+- ✅ Correct build output (`dist` directory)
+- ✅ All required dependencies
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
+
+**Build Settings (Auto-configured):**
+- Framework Preset: `Vite`
+- Build Command: `npm run build`
+- Output Directory: `dist`
+- Install Command: `npm install`
 
 ### Deploy to Netlify
 
@@ -151,6 +163,32 @@ Since this is a static site, you can deploy to:
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build locally
+
+## Troubleshooting
+
+### Vercel Deployment Issues
+
+If you encounter build errors on Vercel, ensure:
+
+1. **Output directory is correct**: Should be `dist` (configured in `vite.config.ts`)
+2. **TypeScript is installed**: Check that `typescript`, `@types/react`, and `@types/react-dom` are in `devDependencies`
+3. **Node.js version**: Vercel uses Node.js 18.x by default, which is compatible with this project
+4. **Build succeeds locally**: Run `npm run build` locally to verify
+
+### Common Build Errors
+
+**Error: "Cannot find module 'typescript'"**
+```bash
+npm install --save-dev typescript @types/react @types/react-dom
+```
+
+**Error: "Output directory not found"**
+- Check `vite.config.ts` has `outDir: 'dist'`
+- Verify `vercel.json` has `"outputDirectory": "dist"`
+
+**Error: "404 on page refresh"**
+- The `vercel.json` includes proper SPA routing configuration
+- All routes redirect to `/index.html`
 
 ## Contributing
 
