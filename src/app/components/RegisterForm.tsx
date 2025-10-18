@@ -56,6 +56,7 @@ export const RegisterForm = ({ walletAddress }: RegisterFormProps) => {
 
   const handleAccountTypeSelect = (type: "user" | "company") => {
     setAccountType(type);
+    setValue("accountType" as any, type);
     reset(); // Reset form when switching types
   };
 
@@ -144,6 +145,11 @@ export const RegisterForm = ({ walletAddress }: RegisterFormProps) => {
       </div>
 
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+        <input
+          type="hidden"
+          {...register("accountType" as any)}
+          value={accountType}
+        />
         {accountType === "user" ? (
           <>
             <div>
