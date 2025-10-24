@@ -50,6 +50,7 @@ export const RegisterForm = ({ walletAddress }: RegisterFormProps) => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<FormFields>({
     resolver: zodResolver(currentSchema as any),
   });
@@ -57,7 +58,7 @@ export const RegisterForm = ({ walletAddress }: RegisterFormProps) => {
   const handleAccountTypeSelect = (type: "user" | "company") => {
     setAccountType(type);
     setValue("accountType" as any, type);
-    reset(); // Reset form when switching types
+    reset();
   };
 
   const onSubmit: SubmitHandler<FormFields> = (data) => {
@@ -67,260 +68,264 @@ export const RegisterForm = ({ walletAddress }: RegisterFormProps) => {
         JSON.stringify({ ...data, walletAddress })
       );
       setIsSubmitted(true);
+      window.location.reload();
     } catch (error) {
       console.error("Error saving registration data:", error);
     }
-    console.log(data);
   };
 
-  if (isSubmitted) {
-    return (
-      <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg p-6 border border-gray-200 text-center">
-        <div className="text-green-600 text-4xl mb-4">✓</div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">
-          Registration Complete!
-        </h2>
-        <p className="text-gray-600">
-          Welcome to Crypto Blue Stones. Your account has been created
-          successfully.
-        </p>
-      </div>
-    );
-  }
-
-  if (!accountType) {
-    return (
-      <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg p-6 border border-gray-200">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-          Choose Account Type
-        </h2>
-        <p className="text-gray-600 text-center mb-8">
-          Select how you'd like to register with Crypto Blue Stones
-        </p>
-
-        <div className="space-y-4">
-          <button
-            onClick={() => handleAccountTypeSelect("user")}
-            className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors font-medium text-lg"
-          >
-            👤 Register as User
-            <div className="text-sm font-normal mt-1 opacity-90">
-              Personal account for individuals
-            </div>
-          </button>
-
-          <button
-            onClick={() => handleAccountTypeSelect("company")}
-            className="w-full bg-green-600 text-white py-4 px-6 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors font-medium text-lg"
-          >
-            🏢 Register as Company
-            <div className="text-sm font-normal mt-1 opacity-90">
-              Business account for organizations
-            </div>
-          </button>
-        </div>
-
-        <button
-          onClick={() => setAccountType(null)}
-          className="w-full mt-6 text-gray-500 hover:text-gray-700 transition-colors text-sm"
-        >
-          ← Back
-        </button>
-      </div>
-    );
-  }
-
   return (
-    <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg p-6 border border-gray-200">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">
-          Register as {accountType === "user" ? "User" : "Company"}
-        </h2>
-        <button
-          onClick={() => setAccountType(null)}
-          className="text-gray-500 hover:text-gray-700 transition-colors"
-        >
-          ← Change Type
-        </button>
-      </div>
+    <div className="w-[80%] h-[80vh] mx-auto flex flex-col items-center justify-center text-[#2aa5ff]  ">
+      {/* Success Screen */}
+      {isSubmitted && (
+        <div className="text-center">
+          <div className="text-green-600 text-4xl mb-4">✓</div>
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">
+            Registration Complete!
+          </h2>
+          <p className="text-gray-600">
+            Welcome to Crypto Blue Stones. Your account has been created
+            successfully.
+          </p>
+        </div>
+      )}
 
-      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-        <input
-          type="hidden"
-          {...register("accountType" as any)}
-          value={accountType}
-        />
-        {accountType === "user" ? (
-          <>
-            <div>
-              <label
-                htmlFor="fullName"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Full Name *
-              </label>
-              <input
-                {...register("fullName" as any)}
-                id="fullName"
-                type="text"
-                placeholder="Enter your full name"
-                className={`w-full text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
-                  (errors as any).fullName
-                    ? "border-red-500"
-                    : "border-gray-300"
-                }`}
-              />
-              <div className="h-5 mt-1">
-                {(errors as any).fullName && (
-                  <p className="text-sm text-red-600">
-                    {(errors as any).fullName.message}
-                  </p>
-                )}
-              </div>
-            </div>
+      {/* Account Type Selection */}
+      {!isSubmitted && !accountType && (
+        <>
+          <h2 className="text-2xl font-bold text-[#2aa5ff] mb-6 text-center">
+            Choose Account Type
+          </h2>
+          <p className="text-white text-center mb-8">
+            Select how you'd like to register with Crypto Blue Stones
+          </p>
 
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Email Address *
-              </label>
-              <input
-                {...register("email" as any)}
-                id="email"
-                type="text"
-                placeholder="Enter your email"
-                className={`w-full text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
-                  (errors as any).email ? "border-red-500" : "border-gray-300"
-                }`}
-              />
-              <div className="h-5 mt-1">
-                {(errors as any).email && (
-                  <p className="text-sm text-red-600">
-                    {(errors as any).email.message}
-                  </p>
-                )}
+          <div className=" flex justify-center items-center w-[50%] mx-auto gap-8">
+            <button
+              onClick={() => handleAccountTypeSelect("user")}
+              className="w-full bg-[#2aa5ff] text-white py-8 px-6 rounded-lg hover:bg-[#1aa4ee] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors font-medium text-lg"
+            >
+              👤 Register as User
+              <div className="text-sm font-normal mt-1 opacity-90">
+                Personal account for individuals
               </div>
-            </div>
+            </button>
 
-            <div>
-              <label
-                htmlFor="nickname"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Nickname *
-              </label>
-              <input
-                {...register("nickname" as any)}
-                id="nickname"
-                type="text"
-                placeholder="Choose a nickname"
-                className={`w-full text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
-                  (errors as any).nickname
-                    ? "border-red-500"
-                    : "border-gray-300"
-                }`}
-              />
-              <div className="h-5 mt-1">
-                {(errors as any).nickname && (
-                  <p className="text-sm text-red-600">
-                    {(errors as any).nickname.message}
-                  </p>
-                )}
+            <button
+              onClick={() => handleAccountTypeSelect("company")}
+              className="w-full bg-white text-[#2aa5ff] py-8 px-6 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors font-medium text-lg"
+            >
+              🏢 Register as Company
+              <div className="text-sm font-normal mt-1 opacity-90">
+                Business account for organizations
               </div>
-            </div>
-          </>
-        ) : (
-          <>
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Company Name *
-              </label>
-              <input
-                {...register("name" as any)}
-                id="name"
-                type="text"
-                placeholder="Enter company name"
-                className={`w-full text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors ${
-                  (errors as any).name ? "border-red-500" : "border-gray-300"
-                }`}
-              />
-              <div className="h-5 mt-1">
-                {(errors as any).name && (
-                  <p className="text-sm text-red-600">
-                    {(errors as any).name.message}
-                  </p>
-                )}
-              </div>
-            </div>
+            </button>
+          </div>
+        </>
+      )}
 
-            <div>
-              <label
-                htmlFor="taxId"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Tax ID *
-              </label>
-              <input
-                {...register("taxId" as any)}
-                id="taxId"
-                type="text"
-                placeholder="Enter tax ID"
-                className={`w-full text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors ${
-                  (errors as any).taxId ? "border-red-500" : "border-gray-300"
-                }`}
-              />
-              <div className="h-5 mt-1">
-                {(errors as any).taxId && (
-                  <p className="text-sm text-red-600">
-                    {(errors as any).taxId.message}
-                  </p>
-                )}
-              </div>
-            </div>
+      {/* Registration Form */}
+      {!isSubmitted && accountType && (
+        <>
+          <div className="flex items-center justify-between ">
+            <h2 className="text-2xl font-bold text-gray-800">
+              Register as {accountType === "user" ? "User" : "Company"}
+            </h2>
+            <button
+              onClick={() => setAccountType(null)}
+              className="text-gray-500 hover:text-gray-700 transition-colors"
+            >
+              ← Change Type
+            </button>
+          </div>
 
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Email Address *
-              </label>
-              <input
-                {...register("email" as any)}
-                id="email"
-                type="text"
-                placeholder="Enter company email"
-                className={`w-full text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors ${
-                  (errors as any).email ? "border-red-500" : "border-gray-300"
-                }`}
-              />
-              <div className="h-5 mt-1">
-                {(errors as any).email && (
-                  <p className="text-sm text-red-600">
-                    {(errors as any).email.message}
-                  </p>
-                )}
-              </div>
-            </div>
-          </>
-        )}
+          <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+            <input
+              type="hidden"
+              {...register("accountType" as any)}
+              value={accountType || ""}
+            />
+            {accountType === "user" ? (
+              <>
+                <div>
+                  <label
+                    htmlFor="fullName"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Full Name *
+                  </label>
+                  <input
+                    {...register("fullName" as any)}
+                    id="fullName"
+                    type="text"
+                    placeholder="Enter your full name"
+                    className={`w-full text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                      (errors as any).fullName
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    }`}
+                  />
+                  <div className="h-5 mt-1">
+                    {(errors as any).fullName && (
+                      <p className="text-sm text-red-600">
+                        {(errors as any).fullName.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
 
-        <button
-          type="submit"
-          className={`w-full py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors font-medium ${
-            accountType === "user"
-              ? "bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500"
-              : "bg-green-600 text-white hover:bg-green-700 focus:ring-green-500"
-          }`}
-        >
-          Register as {accountType === "user" ? "User" : "Company"}
-        </button>
-      </form>
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Email Address *
+                  </label>
+                  <input
+                    {...register("email" as any)}
+                    id="email"
+                    type="text"
+                    placeholder="Enter your email"
+                    className={`w-full text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                      (errors as any).email
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    }`}
+                  />
+                  <div className="h-5 mt-1">
+                    {(errors as any).email && (
+                      <p className="text-sm text-red-600">
+                        {(errors as any).email.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="nickname"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Nickname *
+                  </label>
+                  <input
+                    {...register("nickname" as any)}
+                    id="nickname"
+                    type="text"
+                    placeholder="Choose a nickname"
+                    className={`w-full text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                      (errors as any).nickname
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    }`}
+                  />
+                  <div className="h-5 mt-1">
+                    {(errors as any).nickname && (
+                      <p className="text-sm text-red-600">
+                        {(errors as any).nickname.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Company Name *
+                  </label>
+                  <input
+                    {...register("name" as any)}
+                    id="name"
+                    type="text"
+                    placeholder="Enter company name"
+                    className={`w-full text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors ${
+                      (errors as any).name
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    }`}
+                  />
+                  <div className="h-5 mt-1">
+                    {(errors as any).name && (
+                      <p className="text-sm text-red-600">
+                        {(errors as any).name.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="taxId"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Tax ID *
+                  </label>
+                  <input
+                    {...register("taxId" as any)}
+                    id="taxId"
+                    type="text"
+                    placeholder="Enter tax ID"
+                    className={`w-full text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors ${
+                      (errors as any).taxId
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    }`}
+                  />
+                  <div className="h-5 mt-1">
+                    {(errors as any).taxId && (
+                      <p className="text-sm text-red-600">
+                        {(errors as any).taxId.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Email Address *
+                  </label>
+                  <input
+                    {...register("email" as any)}
+                    id="email"
+                    type="text"
+                    placeholder="Enter company email"
+                    className={`w-full text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors ${
+                      (errors as any).email
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    }`}
+                  />
+                  <div className="h-5 mt-1">
+                    {(errors as any).email && (
+                      <p className="text-sm text-red-600">
+                        {(errors as any).email.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </>
+            )}
+
+            <button
+              type="submit"
+              className={`w-full py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors font-medium ${
+                accountType === "user"
+                  ? "bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500"
+                  : "bg-green-600 text-white hover:bg-green-700 focus:ring-green-500"
+              }`}
+            >
+              Register as {accountType === "user" ? "User" : "Company"}
+            </button>
+          </form>
+        </>
+      )}
     </div>
   );
 };
