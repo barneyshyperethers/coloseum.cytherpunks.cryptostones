@@ -36,9 +36,9 @@ const Navbar = () => {
           </li>
         </ul>
         <div className="flex gap-4 items-center">
-          <button className="p-2 hover:bg-gray-700 rounded-lg transition-colors">
+          <a href="/login" className="p-2 hover:bg-gray-700 rounded-lg transition-colors">
             <FaWallet size={24} className="text-[#2aa5ff]" />
-          </button>
+          </a>
           <IoNotifications size={24} className="" />
           <CgProfile size={24} className="" />
         </div>
