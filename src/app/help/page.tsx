@@ -1,9 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function HelpPage() {
   const [activeSection, setActiveSection] = useState<string>("getting-started");
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const faqData = [
     {
@@ -128,6 +133,7 @@ export default function HelpPage() {
                         ? 'bg-[#2aa5ff] text-white'
                         : 'text-gray-400 hover:bg-[#404040] hover:text-white'
                     }`}
+                    disabled={!isClient}
                   >
                     {section.title}
                   </button>

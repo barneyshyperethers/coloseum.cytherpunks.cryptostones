@@ -36,11 +36,13 @@ const Navbar = () => {
           </li>
         </ul>
         <div className="flex gap-4 items-center">
-          <a href="/login" className="p-2 hover:bg-gray-700 rounded-lg transition-colors">
+          <button className="p-2 hover:bg-gray-700 rounded-lg transition-colors">
             <FaWallet size={24} className="text-[#2aa5ff]" />
-          </a>
+          </button>
           <IoNotifications size={24} className="" />
-          <CgProfile size={24} className="" />
+          <a href="/login" className="p-2 hover:bg-gray-700 rounded-lg transition-colors">
+            <CgProfile size={24} className="" />
+          </a>
         </div>
       </div>
     </nav>

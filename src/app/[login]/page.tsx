@@ -1,9 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function LoginPage() {
   const [selectedAccountType, setSelectedAccountType] = useState<string | null>(null);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleAccountTypeSelect = (type: string) => {
     setSelectedAccountType(type);
@@ -25,6 +30,7 @@ export default function LoginPage() {
                 ? 'border-[#2aa5ff] bg-[#2aa5ff]/10'
                 : 'border-gray-600 hover:border-gray-500'
             }`}
+            disabled={!isClient}
           >
             <div className="text-left">
               <h3 className="text-xl font-semibold mb-2">Register as User</h3>
@@ -39,6 +45,7 @@ export default function LoginPage() {
                 ? 'border-[#2aa5ff] bg-[#2aa5ff]/10'
                 : 'border-gray-600 hover:border-gray-500'
             }`}
+            disabled={!isClient}
           >
             <div className="text-left">
               <h3 className="text-xl font-semibold mb-2">Register as Company</h3>

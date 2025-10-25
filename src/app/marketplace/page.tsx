@@ -1,9 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function MarketplacePage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const categories = [
     { id: "all", name: "All Algorithms", count: 24 },
@@ -117,6 +122,7 @@ export default function MarketplacePage() {
                     ? 'bg-[#2aa5ff] text-white'
                     : 'bg-[#323232] text-gray-400 hover:bg-[#404040]'
                 }`}
+                disabled={!isClient}
               >
                 {category.name} ({category.count})
               </button>
