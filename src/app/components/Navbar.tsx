@@ -1,6 +1,5 @@
 "use client";
 
-import LoginButton from "./LoginButton";
 import { CgProfile } from "react-icons/cg";
 import { IoNotifications } from "react-icons/io5";
 
@@ -36,7 +35,6 @@ const Navbar = () => {
           </li>
         </ul>
         <div className="flex gap-4 items-center">
-          <LoginButton />
           <IoNotifications size={24} className="" />
           <CgProfile size={24} className="" />
         </div>

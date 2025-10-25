@@ -1,6 +1,5 @@
 "use client";
 
-import { usePrivy, useWallets } from "@privy-io/react-auth";
 import { useState, useEffect } from "react";
 import { RegisterForm } from "./components/RegisterForm";
 import Landing from "./components/Landing";

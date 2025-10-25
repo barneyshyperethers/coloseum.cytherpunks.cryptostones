@@ -1,13 +1,10 @@
 "use client";
 
-import { usePrivy, useWallets } from "@privy-io/react-auth";
 import { useState, useEffect } from "react";
 import { RegisterForm } from "../components/RegisterForm";
 
 export default function Home() {
-  const { login, logout, authenticated, user } = usePrivy();
-  const { wallets } = useWallets();
-  const walletAddress = wallets[0]?.address || user?.wallet?.address;
+  const walletAddress = ""; // You'll need to handle wallet address differently now
 
   return <RegisterForm walletAddress={walletAddress!} />;
 }
