@@ -15,7 +15,7 @@ const Navbar = () => {
       <div className="menu flex gap-8">
         <ul className="flex space-x-4">
           <li>
-            <a href="#" className="">
+            <a href="/marketplace" className="">
               Marketplace
             </a>
           </li>
@@ -30,7 +30,7 @@ const Navbar = () => {
             </a>
           </li>
           <li>
-            <a href="#" className="">
+            <a href="/help" className="">
               Help
             </a>
           </li>
