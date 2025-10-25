@@ -2,6 +2,7 @@
 
 import { CgProfile } from "react-icons/cg";
 import { IoNotifications } from "react-icons/io5";
+import { FaWallet } from "react-icons/fa";
 
 const Navbar = () => {
   return (
@@ -35,6 +36,9 @@ const Navbar = () => {
           </li>
         </ul>
         <div className="flex gap-4 items-center">
+          <button className="p-2 hover:bg-gray-700 rounded-lg transition-colors">
+            <FaWallet size={24} className="text-[#2aa5ff]" />
+          </button>
           <IoNotifications size={24} className="" />
           <CgProfile size={24} className="" />
         </div>
