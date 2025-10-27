@@ -50,10 +50,10 @@ export default function LoginPage() {
 
   if (showRegistrationForm) {
     return (
-      <main className="bg-[#161616] text-white min-h-screen flex items-center justify-center">
+      <main className="bg-black text-white min-h-screen flex items-center justify-center">
         <div className="w-full max-w-md mx-auto p-8">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-[#2aa5ff] mb-2">Create Personal Account</h1>
+            <h1 className="text-3xl font-bold text-[#00a8ff] mb-2 cosmic-text-glow">Create Personal Account</h1>
             <p className="text-gray-400">Fill in your details to get started</p>
           </div>
 
@@ -68,7 +68,7 @@ export default function LoginPage() {
                 name="login"
                 value={formData.login}
                 onChange={handleInputChange}
-                className="w-full p-3 rounded-lg bg-[#323232] border border-gray-600 text-white placeholder-gray-400 focus:border-[#2aa5ff] focus:outline-none"
+                className="w-full p-3 border border-[#1e1e3f] text-white placeholder-gray-400 focus:border-[#00a8ff] focus:outline-none"
                 placeholder="Enter your username"
                 required
                 disabled={!isClient}
@@ -85,7 +85,7 @@ export default function LoginPage() {
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className="w-full p-3 rounded-lg bg-[#323232] border border-gray-600 text-white placeholder-gray-400 focus:border-[#2aa5ff] focus:outline-none"
+                className="w-full p-3 border border-[#1e1e3f] text-white placeholder-gray-400 focus:border-[#00a8ff] focus:outline-none"
                 placeholder="Enter your email"
                 required
                 disabled={!isClient}
@@ -102,7 +102,7 @@ export default function LoginPage() {
                 name="password"
                 value={formData.password}
                 onChange={handleInputChange}
-                className="w-full p-3 rounded-lg bg-[#323232] border border-gray-600 text-white placeholder-gray-400 focus:border-[#2aa5ff] focus:outline-none"
+                className="w-full p-3 border border-[#1e1e3f] text-white placeholder-gray-400 focus:border-[#00a8ff] focus:outline-none"
                 placeholder="Enter your password"
                 required
                 disabled={!isClient}
@@ -113,14 +113,14 @@ export default function LoginPage() {
               <button
                 type="button"
                 onClick={handleBackToAccountType}
-                className="flex-1 bg-gray-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-500 transition-colors"
+                className="flex-1 text-gray-400 font-bold py-3 px-6 hover:text-gray-300 transition-colors"
                 disabled={!isClient}
               >
                 Back
               </button>
               <button
                 type="submit"
-                className="flex-1 bg-[#2aa5ff] text-white font-bold py-3 px-6 rounded-lg hover:bg-[#2aa5ff]/90 transition-colors"
+                className="flex-1 text-[#00a8ff] font-bold py-3 px-6 hover:text-[#0088ff] transition-colors cosmic-text-glow"
                 disabled={!isClient}
               >
                 Create Account
@@ -133,20 +133,20 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="bg-[#161616] text-white min-h-screen flex items-center justify-center">
+    <main className="bg-black text-white min-h-screen flex items-center justify-center">
       <div className="w-full max-w-md mx-auto p-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-[#2aa5ff] mb-2">Choose Account Type</h1>
+          <h1 className="text-3xl font-bold text-[#00a8ff] mb-2 cosmic-text-glow">Choose Account Type</h1>
           <p className="text-gray-400">Select the type of account you want to create</p>
         </div>
 
         <div className="space-y-4">
           <button
             onClick={() => handleAccountTypeSelect('personal')}
-            className={`w-full p-6 rounded-lg border-2 transition-all duration-200 ${
+            className={`w-full p-6 border-2 transition-all duration-200 ${
               selectedAccountType === 'personal'
-                ? 'border-[#2aa5ff] bg-[#2aa5ff]/10'
-                : 'border-gray-600 hover:border-gray-500'
+                ? 'border-[#00a8ff] text-[#00a8ff] cosmic-text-glow'
+                : 'border-[#1e1e3f] text-gray-400 hover:text-[#00a8ff]'
             }`}
             disabled={!isClient}
           >
@@ -158,10 +158,10 @@ export default function LoginPage() {
 
           <button
             onClick={() => handleAccountTypeSelect('business')}
-            className={`w-full p-6 rounded-lg border-2 transition-all duration-200 ${
+            className={`w-full p-6 border-2 transition-all duration-200 ${
               selectedAccountType === 'business'
-                ? 'border-[#2aa5ff] bg-[#2aa5ff]/10'
-                : 'border-gray-600 hover:border-gray-500'
+                ? 'border-[#00a8ff] text-[#00a8ff] cosmic-text-glow'
+                : 'border-[#1e1e3f] text-gray-400 hover:text-[#00a8ff]'
             }`}
             disabled={!isClient}
           >
@@ -176,7 +176,7 @@ export default function LoginPage() {
           <div className="mt-8 text-center">
             <button 
               onClick={handleContinue}
-              className="bg-[#2aa5ff] text-white font-bold py-3 px-8 rounded-lg hover:bg-[#2aa5ff]/90 transition-colors"
+              className="text-[#00a8ff] font-bold py-3 px-8 hover:text-[#0088ff] transition-colors cosmic-text-glow"
               disabled={!isClient}
             >
               Continue with {selectedAccountType === 'personal' ? 'Personal' : 'Business'} Account

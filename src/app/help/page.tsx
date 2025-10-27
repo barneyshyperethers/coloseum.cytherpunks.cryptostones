@@ -110,28 +110,28 @@ export default function HelpPage() {
   ];
 
   return (
-    <main className="bg-[#161616] text-white min-h-screen">
+    <main className="bg-black text-white min-h-screen">
       <div className="w-[85%] mx-auto pt-8 pb-16">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-[#2aa5ff] mb-4">Help Center</h1>
+          <h1 className="text-4xl font-bold text-[#00a8ff] mb-4 cosmic-text-glow">Help Center</h1>
           <p className="text-xl text-gray-400">Find answers to common questions and get support</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* FAQ Navigation */}
           <div className="lg:col-span-1">
-            <div className="bg-[#323232] rounded-lg p-6 sticky top-8">
+            <div className="p-6 sticky top-8">
               <h2 className="text-xl font-semibold mb-4">Help Topics</h2>
               <nav className="space-y-2">
                 {faqData.map((section) => (
                   <button
                     key={section.id}
                     onClick={() => setActiveSection(section.id)}
-                    className={`w-full text-left p-3 rounded-lg transition-colors ${
+                    className={`w-full text-left p-3 transition-colors ${
                       activeSection === section.id
-                        ? 'bg-[#2aa5ff] text-white'
-                        : 'text-gray-400 hover:bg-[#404040] hover:text-white'
+                        ? 'text-[#00a8ff] cosmic-text-glow'
+                        : 'text-gray-400 hover:text-[#00a8ff]'
                     }`}
                     disabled={!isClient}
                   >
@@ -144,7 +144,7 @@ export default function HelpPage() {
 
           {/* FAQ Content */}
           <div className="lg:col-span-2">
-            <div className="bg-[#323232] rounded-lg p-6">
+            <div className="p-6">
               <h2 className="text-2xl font-semibold mb-6">
                 {faqData.find(section => section.id === activeSection)?.title}
               </h2>
@@ -154,7 +154,7 @@ export default function HelpPage() {
                   .find(section => section.id === activeSection)
                   ?.questions.map((faq, index) => (
                     <div key={index} className="border-b border-gray-600 pb-6 last:border-b-0">
-                      <h3 className="text-lg font-semibold mb-3 text-[#2aa5ff]">
+                      <h3 className="text-lg font-semibold mb-3 text-[#00a8ff]">
                         {faq.q}
                       </h3>
                       <p className="text-gray-300 leading-relaxed">
@@ -172,11 +172,11 @@ export default function HelpPage() {
           <h2 className="text-3xl font-bold text-center mb-8">Get in Touch</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {contactMethods.map((method, index) => (
-              <div key={index} className="bg-[#323232] rounded-lg p-6 text-center hover:bg-[#404040] transition-colors">
+              <div key={index} className="p-6 text-center hover:text-[#00a8ff] transition-colors">
                 <div className="text-4xl mb-4">{method.icon}</div>
                 <h3 className="text-xl font-semibold mb-2">{method.title}</h3>
                 <p className="text-gray-400 mb-4">{method.description}</p>
-                <p className="text-[#2aa5ff] font-semibold mb-2">{method.contact}</p>
+                <p className="text-[#00a8ff] font-semibold mb-2">{method.contact}</p>
                 <p className="text-sm text-gray-500">{method.response}</p>
               </div>
             ))}
@@ -185,7 +185,7 @@ export default function HelpPage() {
 
         {/* Contact Form */}
         <div className="mt-16">
-          <div className="bg-[#323232] rounded-lg p-8">
+          <div className="p-8">
             <h2 className="text-2xl font-semibold mb-6">Send us a Message</h2>
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -193,7 +193,7 @@ export default function HelpPage() {
                   <label className="block text-sm font-medium mb-2">Name</label>
                   <input
                     type="text"
-                    className="w-full p-3 rounded-lg border border-gray-600 bg-[#404040] text-white placeholder-gray-400"
+                    className="w-full p-3 border border-[#1e1e3f] text-white placeholder-gray-400"
                     placeholder="Your name"
                   />
                 </div>
@@ -201,7 +201,7 @@ export default function HelpPage() {
                   <label className="block text-sm font-medium mb-2">Email</label>
                   <input
                     type="email"
-                    className="w-full p-3 rounded-lg border border-gray-600 bg-[#404040] text-white placeholder-gray-400"
+                    className="w-full p-3 border border-[#1e1e3f] text-white placeholder-gray-400"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -224,7 +224,7 @@ export default function HelpPage() {
               </div>
               <button
                 type="submit"
-                className="bg-[#2aa5ff] text-white font-bold py-3 px-8 rounded-lg hover:bg-[#2aa5ff]/90 transition-colors"
+                className="text-[#00a8ff] font-bold py-3 px-8 hover:text-[#0088ff] transition-colors cosmic-text-glow"
               >
                 Send Message
               </button>

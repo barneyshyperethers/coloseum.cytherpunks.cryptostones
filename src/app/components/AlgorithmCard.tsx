@@ -1,6 +1,6 @@
 const AlgorithmCard = ({ label }: { label: string }) => {
   return (
-    <div className="rounded-2xl flex items-center justify-center bg-[#323232] p-4 aspect-[1/1] w-40 h-40">
+    <div className="flex items-center justify-center p-4 aspect-[1/1] w-40 h-40 hover:text-[#4a9eff] transition-all cosmic-text-glow cosmic-hover cosmic-card">
       {label === "Top" ? (
         <div className="flex flex-col items-center justify-center w-full h-full">
           <span className="text-white font-medium text-center mb-2">Top</span>

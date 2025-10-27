@@ -85,11 +85,11 @@ export default function MarketplacePage() {
     : algorithms.filter(alg => alg.category === selectedCategory);
 
   return (
-    <main className="bg-[#161616] text-white min-h-screen">
+    <main className="bg-black text-white min-h-screen">
       <div className="w-[85%] mx-auto pt-8 pb-16">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-[#2aa5ff] mb-4">Algorithm Marketplace</h1>
+          <h1 className="text-4xl font-bold text-[#00a8ff] mb-4 cosmic-text-glow">Algorithm Marketplace</h1>
           <p className="text-xl text-gray-400">Discover and deploy powerful AI trading algorithms</p>
         </div>
 
@@ -98,7 +98,7 @@ export default function MarketplacePage() {
           <div className="flex gap-4 mb-6">
             <div className="relative flex-1">
               <input
-                className="w-full p-3 rounded-lg border border-gray-600 bg-[#323232] text-white placeholder-gray-400 pr-10"
+                className="w-full p-3 border border-[#1e1e3f] text-white placeholder-gray-400 pr-10"
                 type="search"
                 placeholder="Search algorithms..."
               />
@@ -106,7 +106,7 @@ export default function MarketplacePage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
-            <button className="bg-[#2aa5ff] text-white font-bold px-6 py-3 rounded-lg hover:bg-[#2aa5ff]/90 transition-colors">
+            <button className="text-[#00a8ff] font-bold px-6 py-3 hover:text-[#0088ff] transition-colors cosmic-text-glow">
               Search
             </button>
           </div>
@@ -117,10 +117,10 @@ export default function MarketplacePage() {
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-4 py-2 rounded-lg transition-colors ${
+                className={`px-4 py-2 transition-colors ${
                   selectedCategory === category.id
-                    ? 'bg-[#2aa5ff] text-white'
-                    : 'bg-[#323232] text-gray-400 hover:bg-[#404040]'
+                    ? 'text-[#00a8ff] cosmic-text-glow'
+                    : 'text-gray-400 hover:text-[#00a8ff]'
                 }`}
                 disabled={!isClient}
               >
@@ -133,7 +133,7 @@ export default function MarketplacePage() {
         {/* Algorithm Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredAlgorithms.map((algorithm) => (
-            <div key={algorithm.id} className="bg-[#323232] rounded-lg p-6 hover:bg-[#404040] transition-colors">
+            <div key={algorithm.id} className="p-6 hover:text-[#00a8ff] transition-colors">
               <div className="mb-4">
                 <div
                   className="w-full h-32 rounded-lg mb-4"
@@ -154,14 +154,14 @@ export default function MarketplacePage() {
                   <span className="text-yellow-400">★</span>
                   <span className="text-sm">{algorithm.rating}</span>
                 </div>
-                <span className="text-[#2aa5ff] font-bold">{algorithm.price}</span>
+                <span className="text-[#00a8ff] font-bold">{algorithm.price}</span>
               </div>
 
               <div className="flex gap-2">
-                <button className="flex-1 bg-[#2aa5ff] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#2aa5ff]/90 transition-colors">
+                <button className="flex-1 text-[#00a8ff] font-bold py-2 px-4 hover:text-[#0088ff] transition-colors cosmic-text-glow">
                   View Details
                 </button>
-                <button className="flex-1 bg-transparent border border-[#2aa5ff] text-[#2aa5ff] font-bold py-2 px-4 rounded-lg hover:bg-[#2aa5ff]/10 transition-colors">
+                <button className="flex-1 text-[#00a8ff] font-bold py-2 px-4 hover:text-[#0088ff] transition-colors">
                   Try Demo
                 </button>
               </div>
@@ -171,7 +171,7 @@ export default function MarketplacePage() {
 
         {/* Load More */}
         <div className="text-center mt-12">
-          <button className="bg-[#323232] text-white font-bold py-3 px-8 rounded-lg hover:bg-[#404040] transition-colors">
+          <button className="text-white font-bold py-3 px-8 hover:text-[#00a8ff] transition-colors cosmic-text-glow">
             Load More Algorithms
           </button>
         </div>

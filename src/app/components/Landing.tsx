@@ -3,11 +3,11 @@ import { FaSearch } from "react-icons/fa";
 
 const Landing = () => {
   return (
-    <main className="bg-[#161616] flex flex-col gap-24 text-white min-h-screen  mx-auto pt-24">
+    <main className="bg-black flex flex-col gap-24 text-white min-h-screen  mx-auto pt-24">
       <div className="w-[85%] mx-auto flex flex-col gap-24">
         <div className="flex gap-8 items-center">
           <div className="flex-col flex gap-4 w-1/2 ">
-            <h1 className="text-5xl font-bold mb-4 leading-14 ">
+            <h1 className="text-5xl font-bold mb-4 leading-14 cosmic-text-glow cosmic-hover">
               {" "}
               Welcome to <br />
               Crypto Blue Blocks <br />
@@ -18,13 +18,13 @@ const Landing = () => {
             <div className="flex">
               <div className="relative w-full mr-4">
                 <input
-                  className="rounded-lg p-2 w-full border border-gray-600 pr-10"
+                  className="p-2 w-full border border-[#4a9eff]/30 pr-10 text-white placeholder-gray-400 cosmic-focus"
                   type="search"
                   placeholder="What algorithm are you seeking?"
                 />
                 <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               </div>
-              <button className="bg-[#2aa5ff] text-white font-bold text-lg px-8 py-2 rounded-lg">
+              <button className="text-[#4a9eff] font-bold text-lg px-8 py-2 hover:text-[#2d7ce8] transition-all cosmic-text-glow cosmic-hover">
                 Search
               </button>
             </div>

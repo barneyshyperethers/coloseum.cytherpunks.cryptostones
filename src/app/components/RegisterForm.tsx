@@ -75,7 +75,7 @@ export const RegisterForm = ({ walletAddress }: RegisterFormProps) => {
   };
 
   return (
-    <div className="w-[80%] h-[80vh] mx-auto flex flex-col items-center justify-center text-[#2aa5ff]  ">
+    <div className="w-[80%] h-[80vh] mx-auto flex flex-col items-center justify-center text-[#00a8ff]  ">
       {/* Success Screen */}
       {isSubmitted && (
         <div className="text-center">
@@ -93,7 +93,7 @@ export const RegisterForm = ({ walletAddress }: RegisterFormProps) => {
       {/* Account Type Selection */}
       {!isSubmitted && !accountType && (
         <>
-          <h2 className="text-2xl font-bold text-[#2aa5ff] mb-6 text-center">
+          <h2 className="text-2xl font-bold text-[#00a8ff] mb-6 text-center cosmic-text-glow">
             Choose Account Type
           </h2>
           <p className="text-white text-center mb-8">
@@ -103,7 +103,7 @@ export const RegisterForm = ({ walletAddress }: RegisterFormProps) => {
           <div className=" flex justify-center items-center w-[50%] mx-auto gap-8">
             <button
               onClick={() => handleAccountTypeSelect("user")}
-              className="w-full bg-[#2aa5ff] text-white py-8 px-6 rounded-lg hover:bg-[#1aa4ee] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors font-medium text-lg"
+              className="w-full text-[#00a8ff] py-8 px-6 hover:text-[#0088ff] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors font-medium text-lg cosmic-text-glow"
             >
               👤 Register as User
               <div className="text-sm font-normal mt-1 opacity-90">
@@ -113,7 +113,7 @@ export const RegisterForm = ({ walletAddress }: RegisterFormProps) => {
 
             <button
               onClick={() => handleAccountTypeSelect("company")}
-              className="w-full bg-white text-[#2aa5ff] py-8 px-6 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors font-medium text-lg"
+              className="w-full text-[#00a8ff] py-8 px-6 hover:text-[#0088ff] focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors font-medium text-lg"
             >
               🏢 Register as Company
               <div className="text-sm font-normal mt-1 opacity-90">
@@ -128,7 +128,7 @@ export const RegisterForm = ({ walletAddress }: RegisterFormProps) => {
       {!isSubmitted && accountType && (
         <>
           <div className="flex items-center justify-between ">
-            <h2 className="text-2xl font-bold text-gray-800">
+            <h2 className="text-2xl font-bold text-white">
               Register as {accountType === "user" ? "User" : "Company"}
             </h2>
             <button
@@ -159,10 +159,10 @@ export const RegisterForm = ({ walletAddress }: RegisterFormProps) => {
                     id="fullName"
                     type="text"
                     placeholder="Enter your full name"
-                    className={`w-full text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                    className={`w-full text-black px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-[#00a8ff] transition-colors ${
                       (errors as any).fullName
                         ? "border-red-500"
-                        : "border-gray-300"
+                        : "border-[#1e1e3f]"
                     }`}
                   />
                   <div className="h-5 mt-1">
@@ -186,10 +186,10 @@ export const RegisterForm = ({ walletAddress }: RegisterFormProps) => {
                     id="email"
                     type="text"
                     placeholder="Enter your email"
-                    className={`w-full text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                    className={`w-full text-black px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-[#00a8ff] transition-colors ${
                       (errors as any).email
                         ? "border-red-500"
-                        : "border-gray-300"
+                        : "border-[#1e1e3f]"
                     }`}
                   />
                   <div className="h-5 mt-1">
@@ -213,10 +213,10 @@ export const RegisterForm = ({ walletAddress }: RegisterFormProps) => {
                     id="nickname"
                     type="text"
                     placeholder="Choose a nickname"
-                    className={`w-full text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                    className={`w-full text-black px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-[#00a8ff] transition-colors ${
                       (errors as any).nickname
                         ? "border-red-500"
-                        : "border-gray-300"
+                        : "border-[#1e1e3f]"
                     }`}
                   />
                   <div className="h-5 mt-1">
@@ -242,10 +242,10 @@ export const RegisterForm = ({ walletAddress }: RegisterFormProps) => {
                     id="name"
                     type="text"
                     placeholder="Enter company name"
-                    className={`w-full text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors ${
+                    className={`w-full text-black px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-[#00a8ff] transition-colors ${
                       (errors as any).name
                         ? "border-red-500"
-                        : "border-gray-300"
+                        : "border-[#1e1e3f]"
                     }`}
                   />
                   <div className="h-5 mt-1">
@@ -269,10 +269,10 @@ export const RegisterForm = ({ walletAddress }: RegisterFormProps) => {
                     id="taxId"
                     type="text"
                     placeholder="Enter tax ID"
-                    className={`w-full text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors ${
+                    className={`w-full text-black px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-[#00a8ff] transition-colors ${
                       (errors as any).taxId
                         ? "border-red-500"
-                        : "border-gray-300"
+                        : "border-[#1e1e3f]"
                     }`}
                   />
                   <div className="h-5 mt-1">
@@ -296,10 +296,10 @@ export const RegisterForm = ({ walletAddress }: RegisterFormProps) => {
                     id="email"
                     type="text"
                     placeholder="Enter company email"
-                    className={`w-full text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors ${
+                    className={`w-full text-black px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-[#00a8ff] transition-colors ${
                       (errors as any).email
                         ? "border-red-500"
-                        : "border-gray-300"
+                        : "border-[#1e1e3f]"
                     }`}
                   />
                   <div className="h-5 mt-1">
@@ -315,10 +315,10 @@ export const RegisterForm = ({ walletAddress }: RegisterFormProps) => {
 
             <button
               type="submit"
-              className={`w-full py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors font-medium ${
+              className={`w-full py-2 px-4 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors font-medium ${
                 accountType === "user"
-                  ? "bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500"
-                  : "bg-green-600 text-white hover:bg-green-700 focus:ring-green-500"
+                  ? "text-[#00a8ff] hover:text-[#0088ff] focus:ring-[#00a8ff] cosmic-text-glow"
+                  : "text-[#00a8ff] hover:text-[#0088ff] focus:ring-[#00a8ff] cosmic-text-glow"
               }`}
             >
               Register as {accountType === "user" ? "User" : "Company"}

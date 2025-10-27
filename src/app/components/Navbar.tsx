@@ -48,7 +48,7 @@ const Navbar = () => {
   return (
     <nav className="navbar flex justify-between items-center p-4 px-8 relative">
       <div className="logo">
-        <h1 className="text-2xl font-bold text-[#2aa5ff]">
+        <h1 className="text-2xl font-bold text-[#4a9eff] cosmic-text-glow cosmic-hover">
           Crypto Blue Blocks
         </h1>
       </div>
@@ -80,18 +80,18 @@ const Navbar = () => {
             <button 
               onClick={handleWalletClick}
               disabled={isLoading}
-              className="p-2 hover:bg-gray-700 rounded-lg transition-colors disabled:opacity-50"
+              className="p-2 hover:text-[#4a9eff] transition-colors disabled:opacity-50 cosmic-hover"
             >
-              <FaWallet size={24} className="text-[#2aa5ff]" />
+              <FaWallet size={24} className="text-[#4a9eff]" />
             </button>
             {isConnected && address && (
-              <div className="absolute top-full left-0 mt-2 bg-[#323232] text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap z-50">
+              <div className="absolute top-full left-0 mt-2 text-white px-3 py-2 text-sm whitespace-nowrap z-50">
                 Connected: {formatAddress(address)}
               </div>
             )}
           </div>
           <IoNotifications size={24} className="" />
-          <a href="/login" className="p-2 hover:bg-gray-700 rounded-lg transition-colors">
+          <a href="/login" className="p-2 hover:text-[#4a9eff] transition-colors cosmic-hover">
             <CgProfile size={24} className="" />
           </a>
         </div>
@@ -99,7 +99,7 @@ const Navbar = () => {
       
       {/* Error Message */}
       {showError && (
-        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-red-600 text-white px-4 py-2 rounded-lg text-sm z-50">
+        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 text-red-400 px-4 py-2 text-sm z-50">
           {error || "Please install MetaMask to continue."}
         </div>
       )}
