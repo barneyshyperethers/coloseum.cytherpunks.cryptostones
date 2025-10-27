@@ -18,13 +18,13 @@ const Landing = () => {
             <div className="flex">
               <div className="relative w-full mr-4">
                 <input
-                  className="p-2 w-full border border-[#4a9eff]/30 pr-10 text-white placeholder-gray-400 cosmic-focus"
+                  className="p-2 w-full border border-[#00BFFF]/30 pr-10 text-white placeholder-gray-400 cosmic-focus"
                   type="search"
                   placeholder="What algorithm are you seeking?"
                 />
                 <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               </div>
-              <button className="text-[#4a9eff] font-bold text-lg px-8 py-2 hover:text-[#2d7ce8] transition-all cosmic-text-glow cosmic-hover">
+              <button className="text-[#00BFFF] font-bold text-lg px-8 py-2 hover:text-[#00BFFF] transition-all cosmic-text-glow cosmic-hover">
                 Search
               </button>
             </div>

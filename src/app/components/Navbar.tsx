@@ -48,7 +48,7 @@ const Navbar = () => {
   return (
     <nav className="navbar flex justify-between items-center p-4 px-8 relative">
       <div className="logo">
-        <h1 className="text-2xl font-bold text-[#4a9eff] cosmic-text-glow cosmic-hover">
+        <h1 className="text-2xl font-bold text-[#00BFFF] cosmic-text-glow cosmic-hover">
           Crypto Blue Blocks
         </h1>
       </div>
@@ -80,9 +80,9 @@ const Navbar = () => {
             <button 
               onClick={handleWalletClick}
               disabled={isLoading}
-              className="p-2 hover:text-[#4a9eff] transition-colors disabled:opacity-50 cosmic-hover"
+              className="p-2 hover:text-[#00BFFF] transition-colors disabled:opacity-50 cosmic-hover"
             >
-              <FaWallet size={24} className="text-[#4a9eff]" />
+              <FaWallet size={24} className="text-[#00BFFF]" />
             </button>
             {isConnected && address && (
               <div className="absolute top-full left-0 mt-2 text-white px-3 py-2 text-sm whitespace-nowrap z-50">
@@ -91,7 +91,7 @@ const Navbar = () => {
             )}
           </div>
           <IoNotifications size={24} className="" />
-          <a href="/login" className="p-2 hover:text-[#4a9eff] transition-colors cosmic-hover">
+          <a href="/login" className="p-2 hover:text-[#00BFFF] transition-colors cosmic-hover">
             <CgProfile size={24} className="" />
           </a>
         </div>

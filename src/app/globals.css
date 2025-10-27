@@ -3,16 +3,16 @@
 :root {
   --background: #000000;
   --foreground: #ffffff;
-  --cosmic-sapphire: #4a9eff;
-  --deep-azure: #2d7ce8;
+  --cosmic-sapphire: #00BFFF;
+  --deep-azure: #00BFFF;
   --nebula-purple: #6b46c1;
-  --nebula-blue: #3b82f6;
+  --nebula-blue: #00BFFF;
   --star-white: #ffffff;
   --text-primary: #f8fafc;
   --text-secondary: #cbd5e1;
   --text-muted: #94a3b8;
-  --border-subtle: rgba(74, 158, 255, 0.2);
-  --border-focus: rgba(74, 158, 255, 0.4);
+  --border-subtle: rgba(0, 191, 255, 0.2);
+  --border-focus: rgba(0, 191, 255, 0.4);
 }
 
 @theme inline {
@@ -120,9 +120,9 @@ body::after {
 /* Refined Text Glow */
 .cosmic-text-glow {
   text-shadow: 
-    0 0 8px rgba(74, 158, 255, 0.4),
-    0 0 16px rgba(74, 158, 255, 0.2),
-    0 0 24px rgba(74, 158, 255, 0.1);
+    0 0 8px rgba(0, 191, 255, 0.4),
+    0 0 16px rgba(0, 191, 255, 0.2),
+    0 0 24px rgba(0, 191, 255, 0.1);
 }
 
 /* Subtle Hover Effects */
@@ -133,9 +133,9 @@ body::after {
 .cosmic-hover:hover {
   transform: translateY(-1px);
   text-shadow: 
-    0 0 12px rgba(74, 158, 255, 0.6),
-    0 0 24px rgba(74, 158, 255, 0.3),
-    0 0 36px rgba(74, 158, 255, 0.15);
+    0 0 12px rgba(0, 191, 255, 0.6),
+    0 0 24px rgba(0, 191, 255, 0.3),
+    0 0 36px rgba(0, 191, 255, 0.15);
 }
 
 /* Enhanced Navbar */
@@ -151,7 +151,7 @@ body::after {
   outline: none;
   box-shadow: 
     0 0 0 2px var(--border-focus),
-    0 0 12px rgba(74, 158, 255, 0.3);
+    0 0 12px rgba(0, 191, 255, 0.3);
 }
 
 /* Subtle Card Effects */
