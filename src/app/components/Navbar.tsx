@@ -12,7 +12,7 @@ const Navbar = () => {
     address, 
     connectWallet, 
     disconnectWallet, 
-    isMetaMaskInstalled, 
+    isPhantomInstalled, 
     isLoading, 
     error 
   } = useWallet();
@@ -28,7 +28,7 @@ const Navbar = () => {
   }, [error]);
 
   const handleWalletClick = async () => {
-    if (!isMetaMaskInstalled) {
+    if (!isPhantomInstalled) {
       setShowError(true);
       const timer = setTimeout(() => setShowError(false), 5000);
       return;
@@ -100,7 +100,7 @@ const Navbar = () => {
       {/* Error Message */}
       {showError && (
         <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 text-red-400 px-4 py-2 text-sm z-50">
-          {error || "Please install MetaMask to continue."}
+          {error || "Please install Phantom wallet to continue."}
         </div>
       )}
     </nav>

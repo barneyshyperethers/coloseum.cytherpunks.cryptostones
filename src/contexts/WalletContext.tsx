@@ -1,14 +1,14 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { ethers } from 'ethers';
+import { Connection, PublicKey } from '@solana/web3.js';
 
 interface WalletContextType {
   isConnected: boolean;
   address: string | null;
   connectWallet: () => Promise<void>;
   disconnectWallet: () => void;
-  isMetaMaskInstalled: boolean;
+  isPhantomInstalled: boolean;
   isLoading: boolean;
   error: string | null;
 }
@@ -30,28 +30,25 @@ interface WalletProviderProps {
 export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
   const [isConnected, setIsConnected] = useState(false);
   const [address, setAddress] = useState<string | null>(null);
-  const [isMetaMaskInstalled, setIsMetaMaskInstalled] = useState(false);
+  const [isPhantomInstalled, setIsPhantomInstalled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Check if MetaMask is installed
+  // Check if Phantom is installed
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setIsMetaMaskInstalled(!!window.ethereum);
+      setIsPhantomInstalled(!!window.solana?.isPhantom);
     }
   }, []);
 
   // Check for existing connection on mount
   useEffect(() => {
     const checkConnection = async () => {
-      if (typeof window !== 'undefined' && window.ethereum) {
+      if (typeof window !== 'undefined' && window.solana?.isPhantom) {
         try {
-          const provider = new ethers.BrowserProvider(window.ethereum);
-          const accounts = await provider.listAccounts();
-          if (accounts.length > 0) {
-            const signer = await provider.getSigner();
-            const address = await signer.getAddress();
-            setAddress(address);
+          const response = await window.solana.connect({ onlyIfTrusted: true });
+          if (response.publicKey) {
+            setAddress(response.publicKey.toString());
             setIsConnected(true);
           }
         } catch (error) {
@@ -65,32 +62,30 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
 
   // Listen for account changes
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.ethereum) {
-      const handleAccountsChanged = (accounts: string[]) => {
-        if (accounts.length === 0) {
-          // User disconnected
+    if (typeof window !== 'undefined' && window.solana?.isPhantom) {
+      const handleAccountChange = (publicKey: PublicKey | null) => {
+        if (publicKey) {
+          setAddress(publicKey.toString());
+          setIsConnected(true);
+        } else {
           setIsConnected(false);
           setAddress(null);
-        } else {
-          // User switched accounts
-          setAddress(accounts[0]);
-          setIsConnected(true);
         }
       };
 
-      window.ethereum.on('accountsChanged', handleAccountsChanged);
+      window.solana.on('accountChanged', handleAccountChange);
 
       return () => {
-        if (window.ethereum.removeListener) {
-          window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
+        if (window.solana.removeListener) {
+          window.solana.removeListener('accountChanged', handleAccountChange);
         }
       };
     }
   }, []);
 
   const connectWallet = async () => {
-    if (!window.ethereum) {
-      setError('Please install MetaMask to continue.');
+    if (!window.solana?.isPhantom) {
+      setError('Please install Phantom wallet to continue.');
       return;
     }
 
@@ -98,13 +93,9 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
     setError(null);
 
     try {
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const accounts = await provider.send('eth_requestAccounts', []);
-      
-      if (accounts.length > 0) {
-        const signer = await provider.getSigner();
-        const address = await signer.getAddress();
-        setAddress(address);
+      const response = await window.solana.connect();
+      if (response.publicKey) {
+        setAddress(response.publicKey.toString());
         setIsConnected(true);
       }
     } catch (error: any) {
@@ -130,7 +121,7 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
     address,
     connectWallet,
     disconnectWallet,
-    isMetaMaskInstalled,
+    isPhantomInstalled,
     isLoading,
     error,
   };
@@ -145,6 +136,12 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
 // Extend Window interface for TypeScript
 declare global {
   interface Window {
-    ethereum?: any;
+    solana?: {
+      isPhantom?: boolean;
+      connect: (options?: { onlyIfTrusted?: boolean }) => Promise<{ publicKey: PublicKey }>;
+      disconnect: () => Promise<void>;
+      on: (event: string, callback: (args: any) => void) => void;
+      removeListener: (event: string, callback: (args: any) => void) => void;
+    };
   }
 }
