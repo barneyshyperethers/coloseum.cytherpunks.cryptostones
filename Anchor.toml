@@ -1,0 +1,25 @@
+[features]
+seeds = false
+skip-lint = false
+
+[programs.localnet]
+vendor_factory = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+vendor_profile = "VendorProfile111111111111111111111111111111111111"
+
+[programs.devnet]
+vendor_factory = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+vendor_profile = "VendorProfile111111111111111111111111111111111111"
+
+[programs.mainnet]
+vendor_factory = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+vendor_profile = "VendorProfile111111111111111111111111111111111111"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "Localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
