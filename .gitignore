@@ -1,0 +1,8 @@
+# Solana keypairs
+*.json
+!programs/*/target/*.json
+
+# Anchor build artifacts
+target/
+.docker/
+node_modules/
