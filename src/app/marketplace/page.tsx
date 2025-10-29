@@ -1,14 +1,65 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import MastercardPayment from "../components/MastercardPayment";
+import { usePayment } from "../../contexts/PaymentContext";
+import { useWallet } from "../../contexts/WalletContext";
 
 export default function MarketplacePage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [isClient, setIsClient] = useState(false);
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState<{
+    id: number;
+    name: string;
+    vendor: string;
+    price: string;
+    rating: number;
+    description: string;
+    category: string;
+    image: string;
+  } | null>(null);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  
+  const { addPaymentRecord } = usePayment();
+  const { isConnected, address } = useWallet();
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  const handlePaymentSuccess = (paymentId: string) => {
+    if (selectedAlgorithm) {
+      addPaymentRecord({
+        id: paymentId,
+        amount: parseFloat(selectedAlgorithm.price.replace(/[^0-9.]/g, '')),
+        currency: 'USD',
+        status: 'completed',
+        timestamp: new Date(),
+        method: 'mastercard'
+      });
+    }
+    setShowPaymentModal(false);
+    setSelectedAlgorithm(null);
+    alert('Payment successful! Your algorithm subscription is now active.');
+  };
+
+  const handlePaymentError = (error: string) => {
+    alert(`Payment failed: ${error}`);
+  };
+
+  const handlePurchaseClick = (algorithm: {
+    id: number;
+    name: string;
+    vendor: string;
+    price: string;
+    rating: number;
+    description: string;
+    category: string;
+    image: string;
+  }) => {
+    setSelectedAlgorithm(algorithm);
+    setShowPaymentModal(true);
+  };
 
   const categories = [
     { id: "all", name: "All Algorithms", count: 24 },
@@ -157,13 +208,34 @@ export default function MarketplacePage() {
                 <span className="text-[#00BFFF] font-bold">{algorithm.price}</span>
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex gap-2 mb-3">
                 <button className="flex-1 text-[#00BFFF] font-bold py-2 px-4 hover:text-[#00BFFF] transition-colors cosmic-text-glow">
                   View Details
                 </button>
                 <button className="flex-1 text-[#00BFFF] font-bold py-2 px-4 hover:text-[#00BFFF] transition-colors">
                   Try Demo
                 </button>
+              </div>
+              
+              {/* Payment Options */}
+              <div className="space-y-2">
+                <button 
+                  onClick={() => handlePurchaseClick(algorithm)}
+                  className="w-full bg-gradient-to-r from-[#00BFFF] to-[#0099CC] hover:from-[#0099CC] hover:to-[#0077AA] text-white font-medium py-1.5 px-3 rounded-md transition-all duration-200 cosmic-text-glow cosmic-hover text-sm flex items-center justify-center gap-2"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
+                  Pay with Phantom Wallet
+                </button>
+                <MastercardPayment
+                  amount={parseFloat(algorithm.price.replace(/[^0-9.]/g, ''))}
+                  currency="USD"
+                  onPaymentSuccess={handlePaymentSuccess}
+                  onPaymentError={handlePaymentError}
+                  className="w-full"
+                  buttonText="💳 Pay with Mastercard"
+                />
               </div>
             </div>
           ))}
@@ -176,6 +248,58 @@ export default function MarketplacePage() {
           </button>
         </div>
       </div>
+
+      {/* Payment Modal */}
+      {showPaymentModal && selectedAlgorithm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-gray-900 p-6 rounded-lg max-w-md w-full mx-4">
+            <h3 className="text-xl font-bold text-[#00BFFF] mb-4">
+              Purchase {selectedAlgorithm.name}
+            </h3>
+            <div className="mb-4">
+              <p className="text-gray-300 mb-2">Vendor: {selectedAlgorithm.vendor}</p>
+              <p className="text-gray-300 mb-2">Price: {selectedAlgorithm.price}</p>
+              <p className="text-gray-300 mb-4">Description: {selectedAlgorithm.description}</p>
+            </div>
+            
+            <div className="space-y-3">
+              <button 
+                onClick={() => {
+                  // Handle Phantom wallet payment
+                  alert('Phantom wallet payment would be processed here');
+                  setShowPaymentModal(false);
+                  setSelectedAlgorithm(null);
+                }}
+                className="w-full bg-gradient-to-r from-[#00BFFF] to-[#0099CC] hover:from-[#0099CC] hover:to-[#0077AA] text-white font-medium py-2 px-4 rounded-md transition-all duration-200 cosmic-text-glow cosmic-hover text-sm flex items-center justify-center gap-2"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+                Pay with Phantom Wallet
+              </button>
+              
+              <MastercardPayment
+                amount={parseFloat(selectedAlgorithm.price.replace(/[^0-9.]/g, ''))}
+                currency="USD"
+                onPaymentSuccess={handlePaymentSuccess}
+                onPaymentError={handlePaymentError}
+                className="w-full"
+                buttonText="💳 Pay with Mastercard"
+              />
+            </div>
+            
+            <button
+              onClick={() => {
+                setShowPaymentModal(false);
+                setSelectedAlgorithm(null);
+              }}
+              className="w-full mt-4 text-gray-400 hover:text-white transition-colors"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

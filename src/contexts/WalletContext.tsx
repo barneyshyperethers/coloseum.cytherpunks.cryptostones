@@ -76,7 +76,7 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
       window.solana.on('accountChanged', handleAccountChange);
 
       return () => {
-        if (window.solana.removeListener) {
+        if (window.solana?.removeListener) {
           window.solana.removeListener('accountChanged', handleAccountChange);
         }
       };
@@ -98,9 +98,9 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
         setAddress(response.publicKey.toString());
         setIsConnected(true);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error connecting wallet:', error);
-      if (error.code === 4001) {
+      if (error && typeof error === 'object' && 'code' in error && error.code === 4001) {
         setError('Connection rejected by user.');
       } else {
         setError('Failed to connect wallet. Please try again.');
@@ -140,8 +140,8 @@ declare global {
       isPhantom?: boolean;
       connect: (options?: { onlyIfTrusted?: boolean }) => Promise<{ publicKey: PublicKey }>;
       disconnect: () => Promise<void>;
-      on: (event: string, callback: (args: any) => void) => void;
-      removeListener: (event: string, callback: (args: any) => void) => void;
+      on: (event: string, callback: (args: unknown) => void) => void;
+      removeListener: (event: string, callback: (args: unknown) => void) => void;
     };
   }
 }

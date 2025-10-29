@@ -1,7 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { RegisterForm } from "./components/RegisterForm";
 import Landing from "./components/Landing";
 
 export default function Home() {
